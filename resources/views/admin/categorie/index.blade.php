@@ -25,16 +25,12 @@
             </ul>
         </div>
     </div>
-    <div class="card-block caption-breadcrumb">
-        <div class="breadcrumb-header">
-            <h5>Liste des catégories</h5>
-        </div>
-        <div class="page-header-breadcrumb">
-            <ul class="breadcrumb-title">
-                <li class="breadcrumb-item">
-                        <a href="{{route('categorie.create')}}" class="btn btn-inverse"><i class="icofont icofont-ui-add"></i>Nouveau catégorie</a>
-                </li>
-            </ul>
+    <div class="card">
+        <div class="card-header">
+            <h5>Liste des sub Catégories</h5>
+            <div class="float-right">
+                <a href="{{route('categorie.create')}}" class="btn btn-inverse"><i class="icofont icofont-ui-add"></i>Nouveau catégorie</a>
+            </div>
         </div>
     </div>
     <div class="card">
@@ -84,6 +80,10 @@
                                     @foreach($categorie as $row)
                                         <td>{{$row->name}}</td>
                                         <td>{{$row->slug}}</td>
+                                        <td class="text-right">
+                                            <a href="" class="btn btn-success"><i class="feather icon-edit"></i> edit</a>
+                                            <a href="" class="btn btn-danger"><i class="feather icon-trash"></i> delete</a>
+                                        </td>
                                     @endforeach
                                 </tbody>
                                 <tfoot>
