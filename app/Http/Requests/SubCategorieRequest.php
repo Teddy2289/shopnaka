@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategorieRequest extends FormRequest
+class SubCategorieRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,14 +24,18 @@ class CategorieRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255|unique:categories',
+            'sub_name' => 'required',
+            'categorie_id' => 'required',
+            'product_count' => 'required',
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => 'Veuillez remplir le champs catégorie s\'il vous plais!',
+            'sub_name.required' => 'Veuillez remplir le champs sous catégorie s\'il vous plais!',
+            'categorie_id.required' => 'Veuillez remplir le champs  catégorie s\'il vous plais!',
+            'product_count.required' => 'Veuillez remplir ce champ s\'il vous plais!',
         ];
     }
 }

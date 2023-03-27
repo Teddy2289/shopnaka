@@ -28,7 +28,8 @@
         <div class="card-header">
             <h5>Liste des sub Catégories</h5>
             <div class="float-right">
-                <button class="btn btn-inverse"><i class="icofont icofont-ui-add"></i>Nouveau sub Catégorie</button>
+                <a href="{{route('subcategorie.create')}}" class="btn btn-inverse"><i
+                        class="icofont icofont-ui-add"></i>Nouveau sub Catégorie</a>
             </div>
         </div>
     </div>
@@ -63,50 +64,84 @@
                                     <th class="sorting_asc" tabindex="0" aria-controls="table-style-hover" rowspan="1"
                                         colspan="1" aria-sort="ascending"
                                         aria-label="Name: activate to sort column descending" style="width: 200.547px;">
-                                        Name
+                                        Sous Catégorie
                                     </th>
                                     <th class="sorting" tabindex="0" aria-controls="table-style-hover" rowspan="1"
                                         colspan="1" aria-label="Position: activate to sort column ascending"
-                                        style="width: 321.078px;">Position
+                                        style="width: 321.078px;">Catégorie
                                     </th>
                                     <th class="sorting" tabindex="0" aria-controls="table-style-hover" rowspan="1"
                                         colspan="1" aria-label="Office: activate to sort column ascending"
-                                        style="width: 145.594px;">Office
+                                        style="width: 145.594px;">Slug
                                     </th>
                                     <th class="sorting" tabindex="0" aria-controls="table-style-hover" rowspan="1"
                                         colspan="1" aria-label="Age: activate to sort column ascending"
-                                        style="width: 73.2812px;">Age
-                                    </th>
-                                    <th class="sorting" tabindex="0" aria-controls="table-style-hover" rowspan="1"
-                                        colspan="1" aria-label="Start date: activate to sort column ascending"
-                                        style="width: 148.391px;">Start date
-                                    </th>
-                                    <th class="sorting" tabindex="0" aria-controls="table-style-hover" rowspan="1"
-                                        colspan="1" aria-label="Salary: activate to sort column ascending"
-                                        style="width: 116.312px;">Salary
+                                        style="width: 73.2812px;">Action
                                     </th>
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @foreach($subCategory as $row)
+                                    <tr>
+                                        <td>
+                                            {{$row->sub_name}}
+                                        </td>
+                                        <td>
+                                            {{$row->categorie->name ?? ''}}
+                                        </td>
+                                        <td>
+                                            {{$row->slug}}
+                                        </td>
+                                        <td class="text-right">
+                                            <a href="{{route('subcategorie.edit',$row->id)}}"
+                                               class="btn btn-outline-success"><i
+                                                    class="feather icon-edit"></i> edit</a>
+                                            <a href="#" data-toggle="modal" data-target="#default-Modal{{$row->id}}"
+                                               class="btn btn-outline-danger"><i class="feather icon-trash"></i> delete</a>
+                                        </td>
+                                    </tr>
+                                    <!-- Static Example modal start-->
+                                    <div class="modal fade" id="default-Modal{{$row->id}}" tabindex="-1" role="dialog">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">{{ __('Supprimer Catégorie') }}</h4>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <form method="post" action="{{route('subcategorie.delete',$row->id)}}">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                    <div class="modal-body">
+                                                        {{ __('Voulez-vous Supprimer cette Catégorie ?') }}
+                                                        : <span class="text-pinterest">{{$row->sub_name}}</span></h5>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default waves-effect "
+                                                                data-dismiss="modal">Close
+                                                        </button>
+                                                        <button type="submit"
+                                                                class="btn btn-primary waves-effect waves-light ">Save
+                                                            changes
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Static Example modal start-->
 
+                                @endforeach
 
-                                <tr role="row" class="odd">
-                                    <td class="sorting_1">Airi Satou</td>
-                                    <td>Accountant</td>
-                                    <td>Tokyo</td>
-                                    <td>33</td>
-                                    <td>2008/11/28</td>
-                                    <td>$162,700</td>
-                                </tr>
                                 </tbody>
                                 <tfoot>
                                 <tr>
-                                    <th rowspan="1" colspan="1">Name</th>
-                                    <th rowspan="1" colspan="1">Position</th>
-                                    <th rowspan="1" colspan="1">Office</th>
-                                    <th rowspan="1" colspan="1">Age</th>
-                                    <th rowspan="1" colspan="1">Start date</th>
-                                    <th rowspan="1" colspan="1">Salary</th>
+                                    <th rowspan="1" colspan="1">Sous Catégorie</th>
+                                    <th rowspan="1" colspan="1">Catégorie</th>
+                                    <th rowspan="1" colspan="1">Slug</th>
+                                    <th rowspan="1" colspan="1">Action</th>
                                 </tr>
                                 </tfoot>
                             </table>

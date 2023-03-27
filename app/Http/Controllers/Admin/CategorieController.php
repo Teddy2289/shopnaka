@@ -39,11 +39,23 @@ class CategorieController extends Controller
         return redirect()->route('categorie');
     }
 
-    public function edit (){
-
+    public function edit ($id){
+        $categorie = $this->categoryRepository->find($id);
+        return view('admin.categorie.edit',compact('categorie'));
     }
 
-    public function update(){
+    public function update(Request $request,$id){
+        Categorie::findOrFail($id)->update([
+            'name'=>$request->name,
+            'slug'=> strtolower(str_replace(' ','-',$request->name))
+        ]);
+        Toastr::success('Votre élément a été modifié avec succès.', 'Succès');
+        return redirect()->route('categorie');
+    }
 
+    public function destroy($id){
+        $this->categoryRepository->delete($id);
+        Toastr::success('Votre élément a été supprimer avec succès.', 'Succès');
+        return redirect()->route('categorie');
     }
 }

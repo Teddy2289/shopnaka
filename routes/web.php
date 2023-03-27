@@ -38,12 +38,20 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/categorie', 'index')->name('categorie');
         Route::get('/categorie/create', 'create')->name('categorie.create');
         Route::post('/categorie/store', 'store')->name('categorie.store');
+        Route::get('/categorie/edit/{id}', 'edit')->name('categorie.edit');
+        Route::post('/categorie/update/{id}', 'update')->name('categorie.update');
+        Route::delete('/categorie/delete/{id}', 'destroy')->name('categorie.delete');
     });
     Route::controller(\App\Http\Controllers\Admin\ProduitController::class)->group(function () {
         Route::get('/product', 'index')->name('product');
     });
     Route::controller(\App\Http\Controllers\Admin\SubCategorieController::class)->group(function () {
         Route::get('/subcategorie', 'index')->name('subcategorie');
+        Route::get('/subcategorie/create', 'create')->name('subcategorie.create');
+        Route::post('/subcategorie/store', 'store')->name('subcategorie.store');
+        Route::get('/subcategorie/edit/{id}', 'edit')->name('subcategorie.edit');
+        Route::post('/subcategorie/update/{id}', 'update')->name('subcategorie.update');
+        Route::delete('/subcategorie/delete/{id}', 'destroy')->name('subcategorie.delete');
     });
     Route::controller(\App\Http\Controllers\Admin\CommandeController::class)->group(function () {
         Route::get('/commande', 'index')->name('commande');

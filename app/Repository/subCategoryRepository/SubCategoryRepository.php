@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Repository;
+namespace App\Repository\subCategoryRepository;
 
 
-use App\Models\Categorie;
+use App\Models\SubCategory;
 
-class CategoryRepository implements CategoryInterface{
+class SubCategoryRepository implements SubCategoryInterface {
     protected $model;
-
-    public function __construct(Categorie $model)
+    public function __construct(SubCategory $model)
     {
         $this->model = $model;
     }

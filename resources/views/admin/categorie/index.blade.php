@@ -29,7 +29,8 @@
         <div class="card-header">
             <h5>Liste des sub Catégories</h5>
             <div class="float-right">
-                <a href="{{route('categorie.create')}}" class="btn btn-inverse"><i class="icofont icofont-ui-add"></i>Nouveau catégorie</a>
+                <a href="{{route('categorie.create')}}" class="btn btn-inverse"><i class="icofont icofont-ui-add"></i>Nouveau
+                    catégorie</a>
             </div>
         </div>
     </div>
@@ -77,14 +78,50 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($categorie as $row)
-                                        <td>{{$row->name}}</td>
-                                        <td>{{$row->slug}}</td>
-                                        <td class="text-right">
-                                            <a href="" class="btn btn-success"><i class="feather icon-edit"></i> edit</a>
-                                            <a href="" class="btn btn-danger"><i class="feather icon-trash"></i> delete</a>
-                                        </td>
-                                    @endforeach
+                                @foreach($categorie as $row)
+                                   <tr>
+                                       <td>{{$row->name}}</td>
+                                       <td>{{$row->slug}}</td>
+                                       <td class="text-right">
+                                           <a href="{{route('categorie.edit',$row->id)}}" class="btn btn-outline-success"><i
+                                                   class="feather icon-edit"></i> edit</a>
+                                           <a href="#" data-toggle="modal" data-target="#default-Modal{{$row->id}}"
+                                              class="btn btn-outline-danger" ><i class="feather icon-trash"></i> delete</a>
+                                       </td>
+                                   </tr>
+
+                                    <!-- Static Example modal start-->
+                                    <div class="modal fade" id="default-Modal{{$row->id}}" tabindex="-1" role="dialog">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">{{ __('Supprimer Catégorie') }}</h4>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <form method="post" action="{{route('categorie.delete',$row->id)}}">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                    <div class="modal-body">
+                                                        {{ __('Voulez-vous Supprimer cette Catégorie ?') }} : {{$row->name}} </h5>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default waves-effect "
+                                                                data-dismiss="modal">Close
+                                                        </button>
+                                                        <button type="submit"
+                                                                class="btn btn-primary waves-effect waves-light ">Save
+                                                            changes
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Static Example modal start-->
+                                @endforeach
                                 </tbody>
                                 <tfoot>
                                 <tr>
