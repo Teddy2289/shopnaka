@@ -44,6 +44,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     });
     Route::controller(\App\Http\Controllers\Admin\ProduitController::class)->group(function () {
         Route::get('/product', 'index')->name('product');
+        Route::get('/product/create', 'create')->name('product.create');
+        Route::post('/product/store', 'store')->name('product.store');
+        Route::get('/product/edit/{id}', 'edit')->name('product.edit');
+        Route::post('/product/update', 'update')->name('product.update');
+        Route::delete('/product/delete', 'destroy')->name('product.delete');
     });
     Route::controller(\App\Http\Controllers\Admin\SubCategorieController::class)->group(function () {
         Route::get('/subcategorie', 'index')->name('subcategorie');

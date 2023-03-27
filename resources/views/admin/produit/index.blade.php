@@ -28,7 +28,7 @@
         <div class="card-header">
             <h5>Liste des produits</h5>
             <div class="float-right">
-                <button class="btn btn-inverse"><i class="icofont icofont-ui-add"></i>Nouveau produit</button>
+                <a href="{{route('product.create')}}" class="btn btn-inverse"><i class="icofont icofont-ui-add"></i>Nouveau produit</a>
             </div>
         </div>
     </div>

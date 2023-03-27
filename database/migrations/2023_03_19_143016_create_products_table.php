@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('price');
             $table->foreignId('categorie_id')->constrained()->onDelete('cascade');
             $table->foreignId('sub_categorie_id')->constrained()->onDelete('cascade');
+            $table->integer('quantite');
             $table->string('image');
             $table->string('string');
             $table->timestamps();
